@@ -130,7 +130,7 @@ body{
 
 .error-message-register{
     font-size: 18px;
-    color: white;
+    color: #ff3b2d;
 }
 
 #sidebar{
@@ -367,12 +367,12 @@ body{
 
 .login{
     left: 0;
-    height: 90%;
+    height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     padding-inline: 3em;
-    padding-block: 1em;
+    padding-block: 3em;
 
 }
 
@@ -381,12 +381,12 @@ body{
     margin-right: -5%;
     overflow-x: hidden ;
 	overflow-y: auto;
-    height: 90%;
+    height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     padding-inline: 3em;
-    padding-top: 1em;
+    padding-top: 3em;
     background-color: #d0f7c5;
     padding-bottom: 5em;
 }

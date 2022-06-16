@@ -1,8 +1,11 @@
 # Siw-Catering
 Progetto d'esame per il corso di Sistemi Informativi sul Web.
 
-## Catering
+### Link 
+Accesso al sito online
+- https://catering-siw-leandro.herokuapp.com/
 
+## Catering
 - Dobbiamo progettare e implementare il sistema informativo di una società che offre servizi di catering.
 - La società offre diversi buffet: ogni buffet è proposto da uno chef e contiene uno o più piatti. Ogni buffet ha un nome ed una descrizione. Uno chef può proporre uno o più buffet. Per ogni chef sono di interesse nome, cognome, nazionalità.
 - Per ogni piatto proposto in un buffet sono di interesse il nome, una descrizione, l'elenco degli ingredienti. Per ogni ingrediente è di interesse il nome, l'origine, una descrizione.
