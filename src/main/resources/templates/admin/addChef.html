@@ -9,7 +9,7 @@
 
 <body>
 <!-- Header -->
-<div th:insert="/fragments/header.html :: header"> </div>
+<div th:insert="fragments/header.html :: header"> </div>
 
 <!-- Content -->
 <form th:action="@{/show/allBuffetChefPage}" method="POST" th:object="${chef}" class="add-item-container" >
