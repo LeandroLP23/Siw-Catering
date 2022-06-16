@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<meta charset="UTF-8" />
+	<link href="/css/style.css" rel="stylesheet" />
+	<title>Catering SIW</title>
+</head>
+
+<body>
+	<!-- Header -->
+	<div th:insert="fragments/header.html :: header"> </div>
+
+	<!-- Content -->
+	<div class="all-items-container">
+		<div class="all-items-title">
+			<h1 th:if="${buffets!=null}">I nostri catering</h1>
+			<h1 th:if="${piatti!=null}">I nostri piatti</h1>
+			<h1 th:if="${ingredienti!=null}">I nostri ingredienti</h1>
+			<h1 th:if="${chefs!=null}">I nostri chef</h1>
+			<div class="hor-text">
+				<h1 th:if="${buffetschef!=null}">I catering offerti da&nbsp; </h1>
+				<h1 th:if="${buffetschef!=null}" th:text=" ${chef.nome} +' '+ ${chef.cognome}"></h1>
+			</div>
+			<div class="hor-text flexitem-center">
+				<h1.a th:if="${buffetschef!=null}">Nazionalità:</h1.a>
+					<h1.a th:if="${buffetschef!=null}" th:text="${chef.nazionalita}"></h1.a>
+			</div>
+			<h1.a th:if="${buffetschef!=null}"> La sua collezione al completo</h1.a>
+			<h1.a th:if="${buffetschef==null}"> La nostra collezione al completo</h1.a>
+		</div>
+		<div th:if="buffets!=null" class="all-items-content container">
+			<div th:each="buffet: ${buffets}">
+				<a th:href="@{'/show/buffetPage/' + ${buffet.id}}" class="link">
+					<div class="card">
+						<img class="card-img" src="/images/buffet_image.jpg" alt="Foto buffet"/>
+						<div class="card-text">
+							<h2 th:text="${buffet.nome}"> </h2>
+							<p class="small" th:text="${buffet.descrizione}"></p>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div th:if="piatti!=null" class="all-items-content container">
+			<div th:each="piatto: ${piatti}">
+				<a th:href="@{'/show/piattoPage/' + ${piatto.id}}" class="link">
+					<div class="card">
+						<img class="card-img" src="/images/piatto_image.jpg"  alt="Foto piatto"/>
+						<div class="card-text">
+							<h2 th:text="${piatto.nome}"> </h2>
+							<p class="small" th:text="${piatto.descrizione}"></p>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div th:if="ingredienti!=null" class="all-items-content container">
+			<div th:each="ingrediente: ${ingredienti}">
+				<a th:href="@{'/show/ingredientePage/' + ${ingrediente.id}}" class="link">
+					<div class="card">
+						<img class="card-img" src="/images/ingredienti_image.jpg"  alt="Foto ingrediente"/>
+						<div class="card-text">
+							<h2 th:text="${ingrediente.nome}"> </h2>
+							<p class="small" th:text="${ingrediente.origine}"></p>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div th:if="buffetschef!=null" class="all-items-content container">
+			<div th:each="buffet: ${buffetschef}">
+				<a th:href="@{'/show/buffetPage/' + ${buffet.id}}" class="link">
+					<div class="card">
+						<img class="card-img" src="/images/buffet_image.jpg" alt="Foto buffet"/>
+						<div class="card-text">
+							<h2 th:text="${buffet.nome}"> </h2>
+							<p class="small" th:text="${buffet.descrizione}"></p>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div th:if="chefs!=null" class="all-items-content container">
+			<div th:each="chef: ${chefs}">
+				<div class="chef">
+					<a th:href="@{'/show/allBuffetChefPage/' + ${chef.id}}" class="link">
+						<img class="chef-img" src="/images/chef_image.jpg"  alt="Foto chef"/>
+						<div class="card-text">
+							<h2 th:text="${chef.nome} + ' ' + ${chef.cognome}"> </h2>
+						</div>
+					</a>
+					<span th:text="${chef.nazionalita}"></span>
+					<a sec:authorize-url="/admin" th:href="@{'/admin/editChef/' + ${chef.id}}">
+						<button class="edit-button"> Modifica</button>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="/script/script.js"></script>
+</body>
+
+</html>

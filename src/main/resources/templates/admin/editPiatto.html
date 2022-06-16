@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<link href="/css/style.css" rel="stylesheet" />
+	<title>Catering SIW - Modifica Piatto</title>
+</head>
+
+<body>
+	<!-- Header -->
+	<div th:insert="fragments/header.html :: header"> </div>
+
+	<!-- Content -->
+	<form th:action="@{'/admin/updatePiatto/' + ${piatto.id}}" method="POST" th:object="${piatto}" class="add-item-container">
+		<div class="add-item-container">
+		
+			<h2>Modifica un piatto </h2>
+
+			<!-- Global Error -->
+			<div class="global-error-message" th:if="${#fields.hasGlobalErrors()}">
+				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+			</div>
+
+			<div class="add-item-infos">
+
+				<!-- Nome -->
+				<p>Inserisci nome:</p>
+				<input placeholder="Nome" th:field="${piatto.nome}">
+				<span class="error-message" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+
+				<!-- Selettore ingredienti -->
+				<p>Scegli gli ingredienti </p>
+				<div class="checkbox-grid">
+					<label th:each="ingrediente : ${ingredienti}" class="checkbox-elem">
+						<input type="checkbox" th:value="${ingrediente.id}" th:text="${ingrediente.nome}"
+							th:name="idingredienti" th:checked="${ingredientiSelected.contains(ingrediente)}"/>
+						<span class="checkmark"></span>
+					</label>
+				</div>
+
+				<!-- Descrizione -->
+				<p>Inserisci descrizione:</p>
+				<input placeholder="Descrizione" th:field="${piatto.descrizione}">
+				<span class="error-message" th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
+
+				<!-- Immagine
+				<p>Seleziona un'immagine:</p>
+				<input type="file" accept="image/*">-->
+
+			</div>
+
+			<!-- Bottoni -->
+			<div class="item-button-container">
+				<a th:href="'/admin/deletePiatto/'+ ${piatto.id}" class="link">
+					<div class="item-button elimina-button">Elimina piatto</div>
+				</a>
+				<button type="submit" class="item-button">Salva modifiche</button>
+			</div>
+		</div>
+	</form>
+
+	<script src="/script/script.js"></script>
+</body>
+
+</html>

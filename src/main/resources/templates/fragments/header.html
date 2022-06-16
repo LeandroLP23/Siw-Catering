@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<meta charset="UTF-8" />
+	<link th:href="@{/style/css}" rel="stylesheet" />
+	<title>Pc SIW Masters</title>
+</head>
+
+<body>
+	<div th:fragment="header" id="section-header">
+		<div id="overlay"></div>
+		<div id="sidebar">
+			<div id="sidebar-content">
+				<a th:href="@{/}" class="heading link  ">
+					<div class="sidebar-item">
+						<div>
+							home
+						</div>
+					</div>
+				</a>
+				<a th:href="@{/show/allBuffetPage}" class="heading link">
+					<div class="sidebar-item">
+						<div>
+							buffets
+						</div>
+					</div>
+				</a>
+				<a th:href="@{/show/allChefPage}" class="heading link">
+					<div class="sidebar-item">
+						<div>
+							chefs
+						</div>
+					</div>
+				</a>
+				<a th:href="@{/show/allPiattiPage}" class="heading link">
+					<div class="sidebar-item">
+						<div>
+							piatti
+						</div>
+					</div>
+				</a>
+				<a th:href="@{/show/allIngredientiPage}" class="heading link">
+					<div class="sidebar-item">
+						<div>
+							ingredienti
+						</div>
+					</div>
+				</a>
+				<a sec:authorize-url="/admin" th:href="@{/admin/addIngrediente}" class="heading link">
+					<div class="sidebar-item">
+						<div>
+							aggiungi ingrediente
+						</div>
+					</div>
+				</a>
+				<a sec:authorize-url="/admin" th:href="@{/admin/addPiatto}" class="heading link">
+					<div class="sidebar-item">
+						<div>
+							aggiungi piatto
+						</div>
+					</div>
+				</a>
+				<a sec:authorize-url="/admin" th:href="@{/admin/addBuffet}" class="heading link">
+					<div class="sidebar-item">
+						<div>
+							aggiungi buffet
+						</div>
+					</div>
+				</a>
+				<a sec:authorize-url="/admin" th:href="@{/admin/addChef}" class="heading link">
+					<div class="sidebar-item">
+						<div>
+							aggiungi chef
+						</div>
+					</div>
+				</a>
+
+			</div>
+			<div class="sidebar-bottom">
+				<div sec:authorize="isAuthenticated()" class="sidebar-logout">
+					<form th:action="@{/logout}" method="post" th:hidden="true" class="sidebar-logout">
+						<button class="login-button">Logout</button>
+						<input hidden type="submit" value="Sign Out" th:hidden="true" />
+					</form>
+				</div>
+				<span class="sidebar-names">Leandro Placidi</span>
+			</div>
+		</div>
+		<div class="headerwrapper">
+			<!-- Logo -->
+			<div class="flexitem-center start">
+				<a th:href="@{/}">
+					<img class="logo" src="/images/logocatering.png" alt=""/>
+				</a>
+			</div>
+
+			<!-- Ricerca -->
+			<!--<div class="flexitem-center research">
+				<input id="searchinput" class="research-input" placeholder="Cerca">
+			</div>-->
+
+			<!-- Icons -->
+			<div class="header-info">
+				<a sec:authorize="!isAuthenticated()" th:href="@{/login}">
+					<img class="mini-img-login" src="/images/account.png"  alt="Icona login"/>
+				</a>
+				<div class="flexitem-center start">
+					<div class="welcome-name" sec:authorize="isAuthenticated()">
+						<span>Benvenuto</span>
+						<span sec:authentication="name"></span>
+						<span>!</span>
+					</div>
+				</div>
+				<!--<img id="searchb" class="mini-img" src="/images/search.png" />-->
+				<img id="sbmenu" class="mini-img" src="/images/menu.png"  alt=""/>
+			</div>
+		</div>
+	</div>
+	<script src="/script/script.js"></script>
+</body>
+
+</html>

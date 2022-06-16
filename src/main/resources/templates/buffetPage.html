@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<meta charset="UTF-8" />
+	<link href="/css/style.css" rel="stylesheet" />
+	<title>Catering SIW</title>
+</head>
+
+<body>
+	<!-- Header -->
+	<div th:insert="fragments/header.html :: header"> </div>
+
+	<!-- Content -->
+	<div class="item-container">
+
+		<!-- Left Column -->
+		<div class="item-left-column">
+			<img class="item-img" src="/images/buffet_image.jpg" alt=""/>
+		</div>
+
+		<!-- Right Column -->
+		<div class="item-right-column">
+
+			<!-- Buffet Description -->
+			<div class="item-product-description">
+
+				<!-- Chef-->
+				<span th:text="${chef.nome} +' '+ ${chef.cognome}"></span>
+
+				<!-- Nome -->
+				<h1 th:text="${buffet.nome}"></h1>
+
+				<!-- Descrizione -->
+				<p th:text="${buffet.descrizione}"></p>
+
+				<!-- Elenco piatti -->
+				<h4> Conosci al meglio i nostri piatti:</h4>
+				<ul>
+					<li th:each="piatto : ${buffet.piatti}">
+						<a th:href="@{'/show/piattoPage/' + ${piatto.id}}" th:text="${piatto.nome}" class="link"></a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- Bottone -->
+			<a sec:authorize-url="/admin" th:href="@{'/admin/editBuffet/'+ ${buffet.id}}">
+				<button class="item-button">Modifica buffet</button>
+			</a>
+		</div>
+	</div>
+
+	<script src="/script/script.js"></script>
+</body>
+
+</html>

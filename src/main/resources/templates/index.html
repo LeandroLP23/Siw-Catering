@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<meta charset="UTF-8" />
+	<link href="/css/style.css" rel="stylesheet" />
+	<title>Catering SIW</title>
+</head>
+
+<body>
+	<!-- Header -->
+	<div th:insert="fragments/header.html :: header"> </div>
+
+	<!-- Content -->
+	<div class="content-index">
+		<div class="text-content-index">
+			<h1 class="title">Catering SIW</h1>
+			<h2>Servizio Catering Roma Biologico Ecosostenibile e Equosolidale</h2>
+			<p>
+				<strong>Catering SIW</strong> è una nuovissima e innovatissima attività di <strong>catering a Roma
+					biologica, ecosostenibile ed equosolidale.</strong> Il nostro obiettivo principale è quello di
+				fornire un
+				<strong>servizio catering </strong> basato esclusivamente su prodotti provenienti dalla filiera del
+				biologico a Km0. <br />
+				I produttori da cui ci forniamo sono produttori conosciuti e testati all’interno di G.A.S. locali. In
+				questo modo riusciamo ad abbattere le intermediazioni e i costi.
+			</p>
+			<h3>Ecco una selezione dei nostri servizi:</h3>
+		</div>
+		<div class="container">
+			<div th:each="buffet: ${buffets}">
+				<a th:href="@{'/show/buffetPage/' + ${buffet.id}}" class="link">
+					<div class="card">
+						<img class="card-img" src="/images/buffet_image.jpg" alt=""/>
+						<div class="card-text">
+							<h2 th:text="${buffet.nome}"> </h2>
+							<p class="small" th:text="${buffet.descrizione}"> </p>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="container-footer">
+			<a class="link" th:href="@{/show/allBuffetPage}">
+				<button class="all-buffet-button">
+					Tutti i nostri servizi
+				</button>
+			</a>
+		</div>
+
+		<div class="text-content-index">
+			<h1>I NOSTRI CHEF</h1>
+			<p>
+				<strong>Catering SIW</strong> permette anche di richiedere servizi di catering con <strong>chef
+					personale su richiesta</strong>:
+				<br>scegli tra i migliori chef del momento e visualizza i loro <strong>menu a disposizione</strong>.
+			</p>
+		</div>
+
+		<div class="container">
+			<div th:each="chef: ${chefs}">
+				<div class="chef">
+					<a th:href="@{'/show/allBuffetChefPage/'+${chef.id}}" class="link">
+						<img class="chef-img" src="/images/chef_image.jpg"  alt=""/>
+						<div class="card-text">
+							<h2 th:text="${chef.nome} + ' ' + ${chef.cognome}"> </h2>
+						</div>
+					</a>
+					<span th:text="${chef.nazionalita}"></span>
+					<a sec:authorize-url="/admin" th:href="@{'/admin/editChef/' + ${chef.id}}">
+						<button class="edit-button"> Modifica</button>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="/script/script.js"></script>
+</body>
+
+</html>

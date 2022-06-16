@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<meta charset="UTF-8" />
+	<link href="/css/style.css" rel="stylesheet" />
+	<title>Catering SIW</title>
+</head>
+
+<body>
+	<!-- Header -->
+	<div th:insert="fragments/header.html :: header"> </div>
+
+	<!-- Content -->
+	<div class="item-container">
+
+		<!-- Left Column -->
+		<div class="item-left-column">
+			<img class="item-img" src="/images/ingredienti_image.jpg" />
+		</div>
+
+		<!-- Right Column -->
+		<div class="item-right-column">
+
+			<!-- Item Description -->
+			<div class="item-product-description">
+				
+				<!-- Origine-->
+				<span th:text="${ingrediente.origine}"></span>
+				
+				<!-- Nome -->
+				<h1 th:text="${ingrediente.nome}"></h1>
+				
+				<!-- Descrizione -->
+				<p th:text="${ingrediente.descrizione}"></p>
+
+			</div>
+			
+			<!-- Bottone Modifica-->
+			<a sec:authorize-url="/admin" th:href="@{'/admin/editIngrediente/'+ ${ingrediente.id}}">
+				<button class="item-button">Modifica ingrediente</button>
+			</a>
+		</div>
+	</div>
+
+	<script src="/script/script.js"></script>
+</body>
+
+</html>

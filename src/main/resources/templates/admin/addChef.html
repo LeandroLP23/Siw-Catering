@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<link href="/css/style.css" rel="stylesheet" />
+	<title>Catering SIW - Aggiungi Chef</title>
+</head>
+
+<body>
+<!-- Header -->
+<div th:insert="/fragments/header.html :: header"> </div>
+
+<!-- Content -->
+<form th:action="@{/show/allBuffetChefPage}" method="POST" th:object="${chef}" class="add-item-container" >
+	<div class="add-item-container">
+
+		<h2>Aggiungi uno chef </h2>
+		<div class="add-item-infos">
+
+			<!-- Global Error -->
+			<div th:if="${#fields.hasGlobalErrors()}">
+				<p class="error-message" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+			</div>
+
+			<!-- Nome -->
+			<p>Inserisci nome:</p>
+			<input placeholder="Nome" th:field="${chef.nome}">
+			<span class="error-message" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+
+			<!-- Cognome -->
+			<p>Inserisci cognome:</p>
+			<input placeholder="Cognome" th:field="${chef.cognome}">
+			<span class="error-message" th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></span>
+
+			<!-- Nazionalità -->
+			<p>Inserisci nazionalità:</p>
+			<input placeholder="Nazionalità" th:field="${chef.nazionalita}">
+			<span class="error-message" th:if="${#fields.hasErrors('nazionalita')}" th:errors="*{nazionalita}"></span>
+
+			<!-- Immagine
+            <p>Seleziona un'immagine:</p>
+            <input type="file" accept="image/*" >-->
+
+		</div>
+
+		<!-- Bottone -->
+		<button type="submit" class="item-button">Salva</button>
+	</div>
+</form>
+
+<script src="/script/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<link href="/css/style.css" rel="stylesheet" />
+	<title>Catering SIW - Aggiungi Buffet</title>
+</head>
+
+<body>
+<!-- Header -->
+<div th:insert="fragments/header.html :: header"> </div>
+
+<!-- Content -->
+<form th:action="@{/admin/buffetPage}" method="POST" th:object="${buffet}" class="add-item-container">
+	<div class="add-item-container">
+
+		<h2>Aggiungi un buffet </h2>
+
+		<!-- Global Error -->
+		<div class="global-error-message" th:if="${#fields.hasGlobalErrors()}">
+			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}"></p>
+		</div>
+
+		<div class="add-item-infos">
+
+			<!-- Chef -->
+			<p>Seleziona uno chef:</p>
+			<select name="idchef">
+				<option value="0">Seleziona uno Chef</option>
+				<option th:each="chef : ${chefs}" th:value="${chef.id}"
+						th:text="${chef.nome} + ' '+ ${chef.cognome}"
+						th:selected="${chef.equals(chefSelected)}">
+				</option>
+			</select>
+
+			<!-- Nome -->
+			<p>Inserisci nome:</p>
+			<input placeholder="Nome" th:field="${buffet.nome}">
+			<span class="error-message" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+
+			<!-- Descrizione -->
+			<p>Inserisci descrizione:</p>
+			<input placeholder="Descrizione" th:field="${buffet.descrizione}">
+			<span class="error-message" th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
+
+			<!-- Selettore piatti -->
+			<p>Scegli i piatti </p>
+			<div class="checkbox-grid">
+				<label th:each="piatto : ${piatti}" class="checkbox-elem">
+					<input type="checkbox" th:value="${piatto.id}"
+						   th:checked="${piattiSelected.contains(piatto)}"
+						   th:text="${piatto.nome}" th:name="idpiatti" />
+					<span class="checkmark"></span>
+				</label>
+			</div>
+
+			<!-- Immagine
+			<p>Seleziona un'immagine:</p>
+			<input type="file" accept="image/*">-->
+
+		</div>
+
+		<!-- Bottone -->
+		<button type="submit" class="item-button">Salva</button>
+	</div>
+</form>
+
+<script src="/script/script.js"></script>
+</body>
+
+</html>
