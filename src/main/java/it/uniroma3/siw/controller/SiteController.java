@@ -24,12 +24,11 @@ public class SiteController {
 	
 	@GetMapping(path = {"", "/index","/"})
 	public String getIndex(Model model) {
-		List<Buffet>buffets= new ArrayList<Buffet>();
-		buffets= this.buffetService.findRandomFour();
+
+		List<Buffet>buffets = this.buffetService.findRandomFour();
 		model.addAttribute("buffets",buffets);
 		
-		List<Chef> chefs = new ArrayList<Chef>();
-		chefs=this.chefService.findAll();
+		List<Chef> chefs = this.chefService.findAll();
 		model.addAttribute("chefs",chefs);
 
 		return "index";

@@ -30,6 +30,8 @@
 			<h1.a th:if="${buffetschef!=null}"> La sua collezione al completo</h1.a>
 			<h1.a th:if="${buffetschef==null}"> La nostra collezione al completo</h1.a>
 		</div>
+
+		<!-- Buffets -->
 		<div th:if="buffets!=null" class="all-items-content container">
 			<div th:each="buffet: ${buffets}">
 				<a th:href="@{'/show/buffetPage/' + ${buffet.id}}" class="link">
@@ -43,6 +45,8 @@
 				</a>
 			</div>
 		</div>
+
+		<!-- Piatti -->
 		<div th:if="piatti!=null" class="all-items-content container">
 			<div th:each="piatto: ${piatti}">
 				<a th:href="@{'/show/piattoPage/' + ${piatto.id}}" class="link">
@@ -56,6 +60,8 @@
 				</a>
 			</div>
 		</div>
+
+		<!-- Ingredienti -->
 		<div th:if="ingredienti!=null" class="all-items-content container">
 			<div th:each="ingrediente: ${ingredienti}">
 				<a th:href="@{'/show/ingredientePage/' + ${ingrediente.id}}" class="link">
@@ -69,6 +75,8 @@
 				</a>
 			</div>
 		</div>
+
+		<!-- Buffet per Chef -->
 		<div th:if="buffetschef!=null" class="all-items-content container">
 			<div th:each="buffet: ${buffetschef}">
 				<a th:href="@{'/show/buffetPage/' + ${buffet.id}}" class="link">
@@ -82,6 +90,8 @@
 				</a>
 			</div>
 		</div>
+
+		<!-- Chefs -->
 		<div th:if="chefs!=null" class="all-items-content container">
 			<div th:each="chef: ${chefs}">
 				<div class="chef">

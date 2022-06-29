@@ -15,7 +15,7 @@ import it.uniroma3.siw.model.Piatto;
 import it.uniroma3.siw.repository.BuffetRepository;
 
 @Service
-public class BuffetService implements IServices<Buffet> {
+public class BuffetService {
 
 	@Autowired
 	private BuffetRepository buffetRepository;
@@ -25,12 +25,10 @@ public class BuffetService implements IServices<Buffet> {
 		this.buffetRepository.save(buffet);
 	}
 
-	@Override
 	public Buffet findById(Long id) {
 		return this.buffetRepository.findById(id).get();
 	}
 
-	@Override
 	public List<Buffet> findAll() {
 		List<Buffet> buffets = new ArrayList<Buffet>();
 		for (Buffet i : buffetRepository.findAll()) {
@@ -39,7 +37,6 @@ public class BuffetService implements IServices<Buffet> {
 		return buffets;
 	}
 
-	@Override
 	public boolean alreadyExists(Buffet buffet) {
 		return this.buffetRepository.existsByNomeAndChefAndDescrizione(
 				buffet.getNome(), buffet.getChef(), buffet.getDescrizione());

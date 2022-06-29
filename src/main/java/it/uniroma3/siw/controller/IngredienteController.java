@@ -33,7 +33,9 @@ public class IngredienteController {
 	
 	@GetMapping("/admin/addIngrediente")
 	public String getAddIngrediente(Model model) {
+
 		model.addAttribute("ingrediente", new Ingrediente());
+
 		return "admin/addIngrediente";
 	}
 	
@@ -56,8 +58,10 @@ public class IngredienteController {
 	
 	@GetMapping("/show/ingredientePage/{id}")
 	public String getIngrediente(@PathVariable("id")Long id, Model model) {
+
 		Ingrediente ingrediente = this.ingredienteService.findById(id);
 		model.addAttribute("ingrediente", ingrediente);
+
 		return "ingredientePage";
 	}
 	
@@ -91,6 +95,8 @@ public class IngredienteController {
 
 		if (!bindingResult.hasErrors()) {
 
+			//Save
+			ingrediente.setId(id);
 			this.ingredienteService.save(ingrediente);
 
 			model.addAttribute("ingrediente", ingredienteService.findById(ingrediente.getId()));

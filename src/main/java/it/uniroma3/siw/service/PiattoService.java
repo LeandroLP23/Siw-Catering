@@ -13,7 +13,7 @@ import it.uniroma3.siw.model.Piatto;
 import it.uniroma3.siw.repository.PiattoRepository;
 
 @Service
-public class PiattoService implements IServices<Piatto> {
+public class PiattoService {
 	
 	@Autowired
 	private PiattoRepository piattoRepository;
@@ -23,12 +23,10 @@ public class PiattoService implements IServices<Piatto> {
 		this.piattoRepository.save(piatto);
 	}
 
-	@Override
 	public Piatto findById(Long id) {
 		return this.piattoRepository.findById(id).get();
 	}
 
-	@Override
 	public List<Piatto> findAll() {
 		List<Piatto> piatti = new ArrayList<Piatto>();
 		for (Piatto p : piattoRepository.findAll()) {
@@ -37,7 +35,6 @@ public class PiattoService implements IServices<Piatto> {
 		return piatti;
 	}
 
-	@Override
 	public boolean alreadyExists(Piatto piatto) {
 		return this.piattoRepository.existsByNomeAndDescrizione(
 				piatto.getNome(),piatto.getDescrizione());

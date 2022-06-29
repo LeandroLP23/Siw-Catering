@@ -42,7 +42,7 @@ public class BuffetController {
 
 		model.addAttribute("chefs", this.chefService.findAll());
 		model.addAttribute("piatti", this.piattoService.findAll());
-		model.addAttribute("piattiSelected",new ArrayList<Piatto>());
+		model.addAttribute("piattiSelected", new ArrayList<Piatto>());
 		model.addAttribute("buffet", new Buffet());
 
 		return "admin/addBuffet";
@@ -102,20 +102,6 @@ public class BuffetController {
 		return "admin/editBuffet";
 	}
 
-	@GetMapping("/admin/deleteBuffet/{id}")
-	public String deleteBuffet(@PathVariable("id") Long id, Model model) {
-
-		Buffet buffet = this.buffetService.findById(id);
-		Chef chef = buffet.getChef();
-
-		chef.getBuffets().remove(buffet);
-		buffet.setChef(null);
-		this.chefService.save(chef);
-
-		this.buffetService.deleteById(id);
-		return "redirect:/";
-	}
-
 	@PostMapping("/admin/updateBuffet/{id}")
 	public String updateBuffet(@ModelAttribute("buffet") Buffet buffet, @PathVariable("id") Long id,
 							   @RequestParam(value = "idchef",required = false) Long idChef,
@@ -132,6 +118,8 @@ public class BuffetController {
 
 			this.setChefBuffet(idChef, buffet);
 
+			//Save
+			buffet.setId(id);
 			this.buffetService.save(buffet);
 
 			model.addAttribute("buffet", buffetService.findById(buffet.getId()));
@@ -145,6 +133,20 @@ public class BuffetController {
 
 			return "admin/editBuffet";
 		}
+	}
+
+	@GetMapping("/admin/deleteBuffet/{id}")
+	public String deleteBuffet(@PathVariable("id") Long id, Model model) {
+
+		Buffet buffet = this.buffetService.findById(id);
+		Chef chef = buffet.getChef();
+
+		chef.getBuffets().remove(buffet);
+		buffet.setChef(null);
+		this.chefService.save(chef);
+
+		this.buffetService.deleteById(id);
+		return "redirect:/";
 	}
 
 	@GetMapping("/show/allBuffetPage")

@@ -32,7 +32,9 @@ public class ChefController {
 	
 	@GetMapping("/admin/addChef")
 	public String getAddChef(Model model) {
+
 		model.addAttribute("chef", new Chef());
+
 		return "admin/addChef";
 	}
 	
@@ -50,13 +52,15 @@ public class ChefController {
 			
 			return "redirect:/";
 		} else
-			return "admin/editChef";
+			return "admin/addChef";
 	}
 	
 	@GetMapping("/admin/editChef/{id}")
 	public String getEditChef(@PathVariable("id") Long id, Model model) {
-		Chef chef= chefService.findById(id);
+
+		Chef chef = chefService.findById(id);
 		model.addAttribute("chef", chef);
+
 		return "admin/editChef";
 	}
 	
@@ -75,10 +79,11 @@ public class ChefController {
 
 		if (!bindingResult.hasErrors()) {
 
+			//Save
+			chef.setId(id);
 			this.chefService.save(chef);
 
 			model.addAttribute("chef", chefService.findById(chef.getId()));
-
 			return "redirect:/show/allChefPage";
 		} else
 			return "admin/editChef";

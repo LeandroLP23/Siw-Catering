@@ -157,13 +157,14 @@ body{
     padding: 1.2em .6em .6em 1em;
     display: block;
     text-align: left;
+    font-size: x-large;
     align-items: center;
     width: 100%;
     cursor: pointer;
 }
 
 /*each div under 'sidebar-item'*/
-.sidebar-item > div{
+.sidebar-item div{
     padding: 0 1em;
 }
 
@@ -203,15 +204,11 @@ body{
     width: 100vw;
     height: 100vh;
     position: fixed;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.4);
 
     /*invisible*/
     display: none;
-
-    /*element priority*/
-    z-index: 1;
-
-    /*Shadows*/
-    background-color: rgba(0,0,0,0.4);
 }
 
 .content-index{
@@ -586,7 +583,7 @@ body{
   left:0;
   height: 25px;
   width: 25px;
-  background-color: #eee;
+  background-color: white;
 }
 
 /* On mouse-over, add a grey background color */

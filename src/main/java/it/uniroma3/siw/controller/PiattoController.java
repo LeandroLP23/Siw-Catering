@@ -38,6 +38,7 @@ public class PiattoController {
 
 	@GetMapping("/admin/addPiatto")
 	public String getAddPiatto(Model model) {
+
 		model.addAttribute("piatto",new Piatto());
 		model.addAttribute("ingredienti", this.ingredienteService.findAll());
 		model.addAttribute("ingredientiSelected",new ArrayList<Ingrediente>());
@@ -82,8 +83,10 @@ public class PiattoController {
 
 	@GetMapping("/show/piattoPage/{id}")
 	public String getPiatto(@PathVariable("id")Long id, Model model) {
+
 		Piatto piatto = this.piattoService.findById(id);
 		model.addAttribute("piatto", piatto);
+
 		return "piattoPage";
 	}
 
@@ -99,19 +102,6 @@ public class PiattoController {
 		return "admin/editPiatto";
 	}
 
-	@GetMapping("/admin/deletePiatto/{id}")
-	public String deletePiatto(@PathVariable("id") Long id, Model model) {
-
-		Piatto piatto = this.piattoService.findById(id);
-		List<Buffet> buffets = this.buffetService.findByPiatti(piatto);
-
-		for(Buffet buffet: buffets) {
-			buffet.getPiatti().remove(piatto);
-		}
-
-		this.piattoService.deleteById(id);
-		return "redirect:/";
-	}
 
 	@PostMapping("/admin/updatePiatto/{id}")
 	public String updatePiatto(@ModelAttribute("piatto") Piatto piatto,
@@ -122,12 +112,14 @@ public class PiattoController {
 		if(idIngredienti==null)
 			bindingResult.reject("piatto.ingredienti");
 
-			this.piattoValidator.validate(piatto, bindingResult);
+		this.piattoValidator.validate(piatto, bindingResult);
 
 		if (!bindingResult.hasErrors()) {
 
 			setIngredientiPiatto(piatto, idIngredienti);
 
+			//Save
+			piatto.setId(id);
 			this.piattoService.save(piatto);
 
 			model.addAttribute("piatto", this.piattoService.findById(piatto.getId()));
@@ -145,7 +137,22 @@ public class PiattoController {
 			}
 
 			return "admin/editPiatto";
-	}}
+		}
+	}
+
+	@GetMapping("/admin/deletePiatto/{id}")
+	public String deletePiatto(@PathVariable("id") Long id, Model model) {
+
+		Piatto piatto = this.piattoService.findById(id);
+		List<Buffet> buffets = this.buffetService.findByPiatti(piatto);
+
+		for(Buffet buffet: buffets) {
+			buffet.getPiatti().remove(piatto);
+		}
+
+		this.piattoService.deleteById(id);
+		return "redirect:/";
+	}
 
 	@GetMapping("/show/allPiattiPage")
 	public String getAllPiatti(Model model) {

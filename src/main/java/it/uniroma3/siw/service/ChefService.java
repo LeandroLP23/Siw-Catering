@@ -12,7 +12,7 @@ import it.uniroma3.siw.model.Chef;
 import it.uniroma3.siw.repository.ChefRepository;
 
 @Service
-public class ChefService implements IServices<Chef> {
+public class ChefService {
 	@Autowired
 	private ChefRepository chefRepository;
 	
@@ -21,12 +21,10 @@ public class ChefService implements IServices<Chef> {
 		this.chefRepository.save(chef);
 	}
 
-	@Override
 	public Chef findById(Long id) {
 		return this.chefRepository.findById(id).get();
 	}
 
-	@Override
 	public List<Chef> findAll() {
 		List<Chef> chefs= new ArrayList<Chef>();
 		for (Chef c : chefRepository.findAll()) {
@@ -35,7 +33,6 @@ public class ChefService implements IServices<Chef> {
 		return chefs;
 	}
 
-	@Override
 	public boolean alreadyExists(Chef chef) {
 		return this.chefRepository.existsByNomeAndCognomeAndNazionalita(
 				chef.getNome(), chef.getCognome(),chef.getNazionalita());
